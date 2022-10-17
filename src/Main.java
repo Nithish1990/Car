@@ -32,28 +32,28 @@ public class Main{
                     break;
                 case 3:
                     if (true)
-                        car.handBrake.handBreakPush();
+                        car.getHandBrake().handBreakPush();
                     else
-                        car.brake.brakePush();
+                        car.getBrake().brakePush();
                     break;
                 case 4:
                     car.clutchApplied();
                     break;
                 case 5:
                     car.stopCar();
-                    car.handBrake.handBreakPush();
+                    car.getHandBrake().handBreakPush();
                     break;
                 case 6:
                     System.out.println("ENTER 1 to turn right, -1 to left and 0 to horn");
                     userInput = sc.nextInt();
                     if (userInput == 1) {
-                        car.steeringWheel.turnRight(car.frontWheel);
+                        car.getSteeringWheel().turnRight(car.getFrontWheel());
                         car.turnRight();
                     }
                     else if (userInput == -1)
                         car.turnLeft();
                     else
-                        car.steeringWheel.horn();
+                        car.getSteeringWheel().horn();
                     break;
                 case 7:
                     car.startCar();

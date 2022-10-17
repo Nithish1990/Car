@@ -6,7 +6,7 @@ public class HandBrake {
         handBrake = true;
     }
 
-    public void handBreakPull() {
+    public void handBreakRelease() {
         handBrake = false;
     }
 

@@ -11,7 +11,6 @@ public abstract class Lights {
 class BackLight extends Lights{
     private final String color = Color.RED.toString();
     public void highBeam(){}
-    public  void lowBeam(){}
 }
 class HeadLight extends Lights{
     private final String color = Color.WHITE.toString();

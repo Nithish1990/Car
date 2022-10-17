@@ -3,5 +3,9 @@ public class GearBox{
     public int getGear() {
         return gear;
     }
-    public void setGear(int gear) {}
+    private int gearPositionX = 0,getGearPositionY = 0;
+    public void shiftRight(){}
+    public void shiftLeft(){}
+    public void shiftUp(){}
+    public void shiftDown(){}
 }

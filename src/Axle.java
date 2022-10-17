@@ -3,6 +3,7 @@ public class Axle{
     public void spin(int rpm,Wheel wheel){}
 }
 class FWD_Axle extends Axle{
+    @Override
     public void spin(int rpm,Wheel wheel){}
 }
 class RWD_Axle extends Axle{
@@ -12,8 +13,7 @@ class RWD_Axle extends Axle{
     }
 }
 class _4WD_Axle extends Axle{
-    @Override
-    public void spin(int rpm,Wheel wheel){
+    public void spin(int rpm,Wheel backWheel,Wheel frontWheel){
 
     }
 }

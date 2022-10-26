@@ -5,6 +5,9 @@ public class Axle{
         backWheel.rotate(rpm);
     }
 
+    public void spinReverse(int rpm){
+        backWheel.rotate(rpm);
+    }
     public Axle(FrontWheel frontWheel,Wheel backWheel){
         this.frontWheel = frontWheel;
         this.backWheel = backWheel;

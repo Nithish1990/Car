@@ -15,8 +15,9 @@ public class Main{
         while (true) {
             System.out.println("------------------------------------------------------------------");
             System.out.println("Enter to \n 1.ChangeGear\n 2.Acceleration \n 3.Brake (yet to implemented)\n 4.Clutch (yet to implemented)\n 5.Stop the car\n 6.For Steering Control \n 7.To start the car \n 8. for exit");
-            System.out.print("the two line represents wheel orientation for an example ");
+            System.out.println("the two line represents wheel orientation for an example and cap( ^ ) represent car moving in forward direction   " );
             car.showStatusOfTheCar();
+            System.out.println("Fueling ");
             userInput = sc.nextInt();
             switch (userInput) {
                 case 1:
@@ -61,7 +62,6 @@ public class Main{
                     break;
                 case 8:
                     return;
-
             }
         }
     }

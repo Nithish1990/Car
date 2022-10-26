@@ -9,15 +9,15 @@ public abstract class Lights {
     }
 }
 class BackLight extends Lights{
-    private final String color = Color.RED.toString();
-    public void highBeam(){}
+    private final Color color = Color.RED;
+    public void highBeam(){}//on when on brake applied
 }
 class HeadLight extends Lights{
-    private final String color = Color.WHITE.toString();
+    private final Color color = Color.WHITE;
 
-    public void highBeam(){}
-    public  void lowBeam(){}
+    public void highBeam(){}// on by user
+    public  void lowBeam(){}//on by user
 }
 class Indicator extends Lights{
-    private final String color = Color.YELLOW.toString();
+    private final Color color = Color.YELLOW;
 }

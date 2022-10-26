@@ -1,33 +1,60 @@
-enum EngineTypeBasedOnFuel{
+
+
+enum EngineType{
     ELECTRIC,DIESEL,PETROL;
 }
 
 public  class Engine {
-    private int rpm;
     private boolean engineOn = false;
-    private float fuel;
-    private int horsePowerCC = 10;
-    private String typeOfEngine = EngineTypeBasedOnFuel.ELECTRIC.toString();
+    private int horsePowerCC = 1000;//max threshold will be 100 for an eg....
+    private final EngineType engineType = EngineType.ELECTRIC;
+
+    //reference
+    private GearBox gearBox;
+    private GasTank gasTank;
 
     //methods
     public void setEngineOn(boolean engineOn) {
         this.engineOn = engineOn;
     }
+    public void increaseRPM(int percentage){
+        if(engineOn) {
+            if (gasTank.getFuel() > 0) {
+                gearBox.rotate(horsePowerCC/1000 * percentage);
+                gasTank.consumeFuel();
+            }else{
+                gearBox.rotate(0);
+
+            }
+        }
+    }
+    public void decreaseRPM(int percentage){
+        if(engineOn) {
+            if (gasTank.getFuel() != 0) {
+                gearBox.rotate(horsePowerCC/1000 * percentage);
+                gasTank.consumeFuel();
+            }
+            else{
+                gearBox.rotate(0);
+            }
+        }
+    }
+
+
 
     //SETTER GETTERS
-    public int getRpm() {return rpm;}
-    public float getFuel() {return fuel;}
     public void setHorsePowerCC(int horsePowerCC){
         this.horsePowerCC = horsePowerCC;
     }
     public int getHorsePowerCC(){
         return horsePowerCC;
     }
-    public String getTypeOfEngine(){
-        return  typeOfEngine;
+    public EngineType getEngineType(){
+        return  engineType;
     }
-    public void increaseRPM(float fuel){}
-
-    public void decreaseRPM(float fuel){}
+    public Engine(GearBox gearBox,GasTank gasTank){
+        this.gearBox = gearBox;
+        this.gasTank = gasTank;
+    }
 }
 

@@ -13,12 +13,14 @@ public class Main{
         }
         car.startCar();
         while (true) {
-            System.out.println("Enter to \n 1.ChangeGear\n 2.Acceleration \n 3.Brake\n 4.Clutch\n 5.Stop the car\n 6.For Steering Control");
-        car.showStatusOfTheCar();
+            System.out.println("------------------------------------------------------------------");
+            System.out.println("Enter to \n 1.ChangeGear\n 2.Acceleration \n 3.Brake (yet to implemented)\n 4.Clutch (yet to implemented)\n 5.Stop the car\n 6.For Steering Control \n 7.To start the car \n 8. for exit");
+            System.out.print("the two line represents wheel orientation for an example ");
+            car.showStatusOfTheCar();
             userInput = sc.nextInt();
             switch (userInput) {
                 case 1:
-                    System.out.print("ENTER gear to Change... ");
+                    System.out.println("Enter the gear to change " );
                     userInput = sc.nextInt();
                     car.changeGear(userInput);
                     break;
@@ -26,38 +28,39 @@ public class Main{
                     System.out.println("To Accelerate Press 1 else to Decelerate");
                     userInput = sc.nextInt();
                     if (userInput == 1)
-                        car.accelerate();
+                        car.getAcceleration().press();
                     else
-                        car.decelerate();
+                        car.getAcceleration().release();
                     break;
-                case 3:
+                case 3:// yet to implemented
                     if (true)
                         car.getHandBrake().handBreakPush();
                     else
-                        car.getBrake().brakePush();
+                        car.getBrake().brakePress();
                     break;
-                case 4:
+                case 4:// yet to implemented
                     car.clutchApplied();
                     break;
                 case 5:
                     car.stopCar();
                     car.getHandBrake().handBreakPush();
                     break;
-                case 6:
+                case 6:// steeringWheel fnc
                     System.out.println("ENTER 1 to turn right, -1 to left and 0 to horn");
                     userInput = sc.nextInt();
                     if (userInput == 1) {
-                        car.getSteeringWheel().turnRight(car.getFrontWheel());
-                        car.turnRight();
+                        car.getSteeringWheel().turnRight();
                     }
                     else if (userInput == -1)
-                        car.turnLeft();
+                        car.getSteeringWheel().turnLeft();
                     else
                         car.getSteeringWheel().horn();
                     break;
                 case 7:
                     car.startCar();
                     break;
+                case 8:
+                    return;
 
             }
         }

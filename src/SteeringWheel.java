@@ -1,16 +1,26 @@
 public class SteeringWheel {
-    RightLever rightLever = new RightLever();
-    LeftLever leftLever = new LeftLever();
+    private RightLever rightLever = new RightLever();
+    private LeftLever leftLever = new LeftLever();
     private  int angelOfRotation = 90;
-    public void turnLeft(FrontWheel wheel){
+    private FrontWheel frontWheel;
+
+    //Behavior and methods
+    public void turnLeft(){ //change the angle of in steering wheel which turn the FrontWheel
         angelOfRotation+=30;
-        wheel.turnLeft();
+        frontWheel.turnLeft();
     }
-    public void turnRight(FrontWheel wheel){
+    public void turnRight(){//change the angle of in steering wheel which turn the FrontWheel
         angelOfRotation-=30;
-        wheel.turnRight();
+        frontWheel.turnRight();
     }
     public void horn(){}
+
+
+    //constructor
+    public SteeringWheel(FrontWheel frontWheel){
+        this.frontWheel = frontWheel;
+    }
+    //getters Setters
     public  void setAngelOfRotation(int angelOfRotation){
         this.angelOfRotation = angelOfRotation;
     }
@@ -18,10 +28,23 @@ public class SteeringWheel {
     public int getAngelOfRotation(){
         return angelOfRotation;
     }
+
+    public void setRightLever(RightLever rightLever){
+        this.rightLever = rightLever;
+    }
+    public void setLeftLever(LeftLever leftLever){
+        this.leftLever = leftLever;
+    }
+    public RightLever getRightLever(){
+        return  rightLever;
+    }
+    public  LeftLever getLeftLever(){
+        return  leftLever;
+    }
 }
 class RightLever {
 
-    public void offRightIndicator(Indicator rightIndicators[]){
+    public void offRightIndicator(Indicator rightIndicators[]){// if offRightIndicator called all the light are off
         for(int i = 0;i<rightIndicators.length;i++)
             rightIndicators[i].offLight();
     }

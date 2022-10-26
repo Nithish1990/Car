@@ -3,14 +3,14 @@ enum BrakeType{
 }
 
 public class Brake {
-    public final String brakeType = BrakeType.DISK.toString();
+    public BrakeType brakeType = BrakeType.DISK;
     private boolean brake = false;
-
-    public void brakePush() {
+//    private float brakePercentage = 0f;
+    public void brakePress() {
         brake = true;
     }
-
-    public void brakePull() {
+    //behavior
+    public void brakeRelease() {
         brake = false;
     }
 
@@ -22,4 +22,16 @@ public class Brake {
     public void setBrake(boolean brake) {
         this.brake = brake;
     }
+
+    // setGetter
+
+    public BrakeType getBrakeType() {
+        return brakeType;
+    }
+
+    public void setBrakeType(BrakeType brakeType) {
+        this.brakeType = brakeType;
+    }
+
+
 }

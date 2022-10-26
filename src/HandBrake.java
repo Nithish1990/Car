@@ -1,5 +1,5 @@
 public class HandBrake {
-    public final String brakeType = BrakeType.ABS.toString();
+    public BrakeType brakeType = BrakeType.ABS;
     private boolean handBrake = false;
 
     public void handBreakPush() {

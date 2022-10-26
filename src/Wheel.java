@@ -1,28 +1,28 @@
 enum Material{
-    RUBBER,CARBON,PLASTIC;
+    RUBBER,CARBON,PLASTIC,STEAL,ALUMINIUM;
 }
 public class Wheel {
-    private String material  = Material.RUBBER.toString();
-    private int circumference = 10;
-    private int speed;
+
+    private int circumference = 10;//size of wheel
+    private int speed = 0;
     private int distanceTravelled = 0;
-    private boolean rotationClockwise = true;
-    private boolean isBrakeApplied;
-
-    public void setBrakeApplied(boolean brakeApplied){
-        this.isBrakeApplied = brakeApplied;
-    }
-    public boolean getBrakeApplied(){
-        return isBrakeApplied;
-    }
+    private boolean isBrakeApplied = true;
 
 
-    public void rotate(int rpm,boolean brake){
+    //backWheel behavior
+    public void rotate(int rpm){
+        if(isBrakeApplied) {
+            this.speed = circumference * rpm;
+        }
 
     }
-    public String getMaterial() {
-        return material;
+    static class Calculate{//helper class for calculating speed distance
+        public void calSpeed(){}
+        public void calDis(){}
     }
+
+
+    // getters setters
 
     public int getCircumference() {
         return circumference;
@@ -48,23 +48,41 @@ public class Wheel {
         this.distanceTravelled = distanceTravelled;
     }
 
-    public boolean isRotationClockwise() {
-        return rotationClockwise;
-    }
 
-    public void setRotationClockwise(boolean rotationClockwise) {
-        this.rotationClockwise = rotationClockwise;
+    public void setBrakeApplied(boolean brakeApplied){
+        this.isBrakeApplied = brakeApplied;
     }
-    //getters setters
-
+    public boolean getBrakeApplied(){
+        return isBrakeApplied;
+    }
 }
 class FrontWheel extends Wheel {
     private  int angleOfRotation = 90;
     public void turnLeft(){
         angleOfRotation+=30;
     }
-    public void turnRight(){
-        angleOfRotation-=30;
+    public void turnRight(){angleOfRotation-=30;}
+
+
+    public int getAngleOfRotation() {
+        return angleOfRotation;
+    }
+}
+
+
+class Tyre{
+    private final Material material  = Material.RUBBER;
+    private int airPressure = 50;
+
+    public Material getMaterial() {
+        return material;
     }
 
+    public int getAirPressure() {
+        return airPressure;
+    }
+
+    public void setAirPressure(int airPressure) {
+        this.airPressure = airPressure;
+    }
 }

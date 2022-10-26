@@ -1,19 +1,12 @@
 public class Axle{
-    private static final String  material = "METAL";
-    public void spin(int rpm,Wheel wheel){}
-}
-class FWD_Axle extends Axle{
-    @Override
-    public void spin(int rpm,Wheel wheel){}
-}
-class RWD_Axle extends Axle{
-    @Override
-    public void spin(int rpm,Wheel wheel){
-
+    private static Material  material = Material.STEAL;
+    private Wheel backWheel,frontWheel;// reference of wheels to rotate
+    public void spin(int rpm){
+        backWheel.rotate(rpm);
     }
-}
-class _4WD_Axle extends Axle{
-    public void spin(int rpm,Wheel backWheel,Wheel frontWheel){
 
+    public Axle(FrontWheel frontWheel,Wheel backWheel){
+        this.frontWheel = frontWheel;
+        this.backWheel = backWheel;
     }
 }

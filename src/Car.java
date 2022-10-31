@@ -1,28 +1,29 @@
-import java.time.LocalTime;
+
+
+import java.util.Scanner;
+
 public class Car{
     private Color color = Color.BLUE;
-    private int speed;
-    private int gear;
     private int distanceTravelled;
-    private boolean clutch = false;
 
     // objects
-    private Wheel backWheel = new Wheel();
-    private FrontWheel frontWheel = new FrontWheel();
+    private Brake brake = new Brake();
+    private Wheel backWheel = new Wheel(brake);
+    private FrontWheel frontWheel = new FrontWheel(brake);
     private Axle axle = new Axle(frontWheel,backWheel);
     private GearBox gearBox = new GearBox(axle);
     private GasTank gasTank = new GasTank();
-    private Engine engine = new Engine(gearBox,gasTank);
+    private Clutch clutch = new Clutch(gearBox);
+    private Engine engine = new Engine(clutch,gasTank);
     private MusicSystem musicSystem = new MusicSystem();
-    private Brake brake = new Brake();
+
     private HandBrake handBrake = new HandBrake();
-
-    private SteeringWheel steeringWheel = new SteeringWheel(frontWheel);
+    private SteeringWheelAndWheel_Connector steeringWheelAndWheel_Connector = new SteeringWheelAndWheel_Connector(frontWheel);
+    private SteeringWheel steeringWheel = new SteeringWheel(steeringWheelAndWheel_Connector);
     private CarBody carBody = new CarBody();
-
-
     //pedals
-    private Pedals acceleration = new Acceleration(engine);
+    private Pedals accelerationPedal = new AccelerationPedal(engine),clutchPedal = new ClutchPedal(clutch),brakePedal = new BrakePedal(brake);
+
     // behavior
     public void startCar(){
         engine.setEngineOn(true);
@@ -31,13 +32,6 @@ public class Car{
         engine.setEngineOn(false);
     } //stop the car and engine
 
-
-
-    //pedals
-    public void clutchApplied(){}//clutch enable
-    public void clutchReleased(){}//disable Clutch
-    public void accelerate(){}//instruction increase rpm of the engine which increase rotation of wheel
-    public  void  decelerate(){}
     public void changeGear(int gear){
         /*
             as of now user can change gear by giving input later on user only can change gear by shifting the gear lever
@@ -54,26 +48,33 @@ public class Car{
 
     @Override
     public String toString(){
-        String tyre = frontWheel.getAngleOfRotation() == 120?"\\\\":frontWheel.getAngleOfRotation() == 90?"||":"//";
-        return tyre +" Speed: "+backWheel.getSpeed()/10+", Distance Travelled: "+backWheel.getDistanceTravelled()+", Fuel: "+gasTank.getFuel()+" "+tyre;
+        String tyre = frontWheel.getAngleOfRotation() == 120?"\\\\":frontWheel.getAngleOfRotation() == 90?"||":"//",direction = gearBox.getGear() != 6?"^":"\\/";
+        return tyre +" Speed: "+backWheel.getSpeed()/10+
+                ", Distance Travelled: "+backWheel.getDistanceTravelled()+
+                ", Fuel: "+gasTank.getFuel()+
+                " Current Gear "+gearBox.getGear()+
+                ", Clutch "+(clutch.isEngage()?"//":"||")+
+                ", Acceleration "+accelerationPedal.getPressingPercentage()+
+                ", Brake "+brake.getFrictionToTheWheel()+
+                ", "+tyre+", "+direction;
     }
-
+    public void press(int userInput, Scanner sc){
+        switch (userInput){
+            case 1:// in future method overloading will be implemented
+                userInput = sc.nextInt();
+                press(getClutchPedal(),userInput);
+                break;
+            case 2:// brake
+                userInput = sc.nextInt();
+                press(getBrakePedal(),userInput);
+                break;
+            case 3:// acceleration
+                userInput = sc.nextInt();
+                press(getAccelerationPedal(),userInput);
+                break;
+        }//switch
+    }
     //getter Setter
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
-    public int getGear() {
-        return gear;
-    }
-
-    public void setGear(int gear) {
-        this.gear = gear;
-    }
 
     public int getDistanceTravelled() {
         return distanceTravelled;
@@ -81,10 +82,6 @@ public class Car{
 
     public void setDistanceTravelled(int distanceTravelled) {
         this.distanceTravelled = distanceTravelled;
-    }
-
-    public boolean getClutch() {
-        return clutch;
     }
     public Color getColor() {
         return color;
@@ -94,13 +91,6 @@ public class Car{
         this.color = color;
     }
 
-    public boolean isClutch() {
-        return clutch;
-    }
-
-    public void setClutch(boolean clutch) {
-        this.clutch = clutch;
-    }
 
     public Engine getEngine() {
         return engine;
@@ -177,10 +167,47 @@ public class Car{
     public Axle getRwd() {
         return axle;
     }
-    public Pedals getAcceleration(){
-        return  acceleration;
-    }
     public void setRwd(Axle axle) {
         this.axle = axle;
+    }
+
+    public Pedals getClutch(){
+        return clutchPedal;
+    }
+
+    public Pedals getAccelerationPedal() {
+        return accelerationPedal;
+    }
+
+    public void setAccelerationPedal(Pedals accelerationPedal) {
+        this.accelerationPedal = accelerationPedal;
+    }
+
+    public Pedals getClutchPedal() {
+        return clutchPedal;
+    }
+
+    public void setClutchPedal(Pedals clutchPedal) {
+        this.clutchPedal = clutchPedal;
+    }
+
+    public Pedals getBrakePedal() {
+        return brakePedal;
+    }
+
+    public void setBrakePedal(Pedals brakePedal) {
+        this.brakePedal = brakePedal;
+    }
+
+    public void setClutch(ClutchPedal clutch){
+        this.clutchPedal = clutch;
+    }
+
+    public static void press(Pedals pedal,int userInput){
+        if(userInput == 1){
+            pedal.press();
+        }else{
+            pedal.release();
+        }
     }
 }

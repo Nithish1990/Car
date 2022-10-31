@@ -10,37 +10,22 @@ public  class Engine {
     private final EngineType engineType = EngineType.ELECTRIC;
 
     //reference
-    private GearBox gearBox;
-    private GasTank gasTank;
-
+    private Clutch clutch;//connected to gear
+    private GasTank gasTank;//pipe line
     //methods
     public void setEngineOn(boolean engineOn) {
         this.engineOn = engineOn;
     }
-    public void increaseRPM(int percentage){
+    public void changeRPM(int percentage){
         if(engineOn) {
             if (gasTank.getFuel() > 0) {
-                gearBox.rotate(horsePowerCC/1000 * percentage);
                 gasTank.consumeFuel();
+               clutch.spin(horsePowerCC/1000 * percentage/10);
             }else{
-                gearBox.rotate(0);
-
+                clutch.spin(0);
             }
         }
     }
-    public void decreaseRPM(int percentage){
-        if(engineOn) {
-            if (gasTank.getFuel() != 0) {
-                gearBox.rotate(horsePowerCC/1000 * percentage);
-                gasTank.consumeFuel();
-            }
-            else{
-                gearBox.rotate(0);
-            }
-        }
-    }
-
-
 
     //SETTER GETTERS
     public void setHorsePowerCC(int horsePowerCC){
@@ -52,8 +37,8 @@ public  class Engine {
     public EngineType getEngineType(){
         return  engineType;
     }
-    public Engine(GearBox gearBox,GasTank gasTank){
-        this.gearBox = gearBox;
+    public Engine(Clutch clutch,GasTank gasTank){
+        this.clutch = clutch;
         this.gasTank = gasTank;
     }
 }

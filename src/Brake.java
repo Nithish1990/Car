@@ -1,37 +1,27 @@
 enum BrakeType{
-    DISK,ABS,POWER;
+    DISK,ABS,POWER,DRUM;
 }
+public class Brake{
+    //properties
+    private BrakeType brakeType = BrakeType.DISK;
+    private int frictionToTheWheel = 1;
+    // behavior
 
-public class Brake {
-    public BrakeType brakeType = BrakeType.DISK;
-    private boolean brake = false;
-//    private float brakePercentage = 0f;
-    public void brakePress() {
-        brake = true;
-    }
-    //behavior
-    public void brakeRelease() {
-        brake = false;
+    public void increaseFriction(int percentage){
+        frictionToTheWheel = percentage;
     }
 
-
-    public boolean isBrake() {
-        return brake;
-    }
-
-    public void setBrake(boolean brake) {
-        this.brake = brake;
-    }
-
-    // setGetter
-
+    // getter setters
     public BrakeType getBrakeType() {
         return brakeType;
     }
-
     public void setBrakeType(BrakeType brakeType) {
         this.brakeType = brakeType;
     }
-
-
+    public void setFrictionToTheWheel(int frictionToTheWheel){
+        this.frictionToTheWheel = frictionToTheWheel;
+    }
+    public int getFrictionToTheWheel(){
+        return frictionToTheWheel;
+    }
 }

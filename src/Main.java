@@ -1,8 +1,7 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Main{
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         Car car = new Car();
         System.out.println("Enter 1 to Start the car");
@@ -13,40 +12,23 @@ public class Main{
         }
         car.startCar();
         while (true) {
-            System.out.println("------------------------------------------------------------------");
-            System.out.println("Enter to \n 1.ChangeGear\n 2.Acceleration \n 3.Brake (yet to implemented)\n 4.Clutch (yet to implemented)\n 5.Stop the car\n 6.For Steering Control \n 7.To start the car \n 8. for exit");
-            System.out.println("the two line represents wheel orientation for an example and cap( ^ ) represent car moving in forward direction   " );
+            System.out.println("-----------------------------------------------------------------------------------------------------------------");
+            System.out.println("Enter to \n 1.GearBox \n 2.Pedals \n 3.For Steering Control (lever control yet to implement) \n 4.To start the car Or To off the car\n 5.For exit");
             car.showStatusOfTheCar();
-            System.out.println("Fueling ");
             userInput = sc.nextInt();
             switch (userInput) {
-                case 1:
+                case 1://hand break also come here
                     System.out.println("Enter the gear to change " );
                     userInput = sc.nextInt();
                     car.changeGear(userInput);
                     break;
                 case 2:
-                    System.out.println("To Accelerate Press 1 else to Decelerate");
+                    System.out.println("Enter\n 1.Clutch\n 2 Brake \n 3 Acceleration");
                     userInput = sc.nextInt();
-                    if (userInput == 1)
-                        car.getAcceleration().press();
-                    else
-                        car.getAcceleration().release();
+                    System.out.println("press 1 to Press or any other int  to Release");
+                    car.press(userInput,sc);
                     break;
-                case 3:// yet to implemented
-                    if (true)
-                        car.getHandBrake().handBreakPush();
-                    else
-                        car.getBrake().brakePress();
-                    break;
-                case 4:// yet to implemented
-                    car.clutchApplied();
-                    break;
-                case 5:
-                    car.stopCar();
-                    car.getHandBrake().handBreakPush();
-                    break;
-                case 6:// steeringWheel fnc
+                case 3:// steeringWheel fnc
                     System.out.println("ENTER 1 to turn right, -1 to left and 0 to horn");
                     userInput = sc.nextInt();
                     if (userInput == 1) {
@@ -57,10 +39,16 @@ public class Main{
                     else
                         car.getSteeringWheel().horn();
                     break;
-                case 7:
-                    car.startCar();
+                case 4:
+                    System.out.println("To Start the car press 1 or any to stop");
+                    userInput = sc.nextInt();
+                    if(userInput == 1)
+                        car.startCar();
+                    else
+                        car.stopCar();
                     break;
-                case 8:
+                case 5:
+                    System.out.println("source code in  https://github.com/Nithish1990/Car/tree/master/src Thank you.... ");
                     return;
             }
         }

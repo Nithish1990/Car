@@ -1,7 +1,6 @@
 public class GasTank {
     private int capacity = 20;
     private int fuel = 100;
-
     // behavior
 
     public void addFuel(int fuel){

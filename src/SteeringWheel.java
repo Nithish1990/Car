@@ -1,24 +1,28 @@
+
+
 public class SteeringWheel {
     private RightLever rightLever = new RightLever();
     private LeftLever leftLever = new LeftLever();
     private  int angelOfRotation = 90;
-    private FrontWheel frontWheel;
+    private SteeringWheelAndWheel_Connector steeringWheelAndWheel_connector;
 
     //Behavior and methods
     public void turnLeft(){ //change the angle of in steering wheel which turn the FrontWheel
         angelOfRotation+=30;
-        frontWheel.turnLeft();
+        steeringWheelAndWheel_connector.turnLeft();
     }
     public void turnRight(){//change the angle of in steering wheel which turn the FrontWheel
         angelOfRotation-=30;
-        frontWheel.turnRight();
+        steeringWheelAndWheel_connector.turnRight();
     }
-    public void horn(){}
+    public void horn(){
+        System.out.println("Horn sound");
+    }
 
 
     //constructor
-    public SteeringWheel(FrontWheel frontWheel){
-        this.frontWheel = frontWheel;
+    public SteeringWheel(SteeringWheelAndWheel_Connector steeringWheelAxle){
+        this.steeringWheelAndWheel_connector = steeringWheelAxle;
     }
     //getters Setters
     public  void setAngelOfRotation(int angelOfRotation){
@@ -70,4 +74,7 @@ class LeftLever{
         headLight.lowBeam();
     }
 }
+
+
+
 

@@ -1,7 +1,7 @@
 import sun.dc.pr.PRError;
 
 public class CarBody {
-    public Material material = Material.ALUMINIUM;
+    public final Material material = Material.ALUMINIUM;
     public Door DriverDoor = new Door();
     public Door door[] = new Door[3];
     private Indicator rightIndicators[] = new Indicator[3];
